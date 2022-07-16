@@ -10,8 +10,8 @@ using namespace std;
 
 class Solution{
     public:
-    int leftest ,rightest;
-    
+	int leftest, rightest; //to keep track of leftmost and rightmost ind value coz wanna use unordered_map
+
     void solve(Node *root, unordered_map<int, pair<int,int>> &mp, int ind, int level){
 		if(!root) return;
 	
@@ -39,7 +39,7 @@ class Solution{
         solve(root, mp, 0, 0);
         vector<int> ans;
     
-        for(int i=leftest;i<=rightest;i++)
+        for(int i=leftest;i<=rightest;i++) //index traversing
             if(mp.find(i)!=mp.end())
                 ans.push_back(mp[i].second);
     
