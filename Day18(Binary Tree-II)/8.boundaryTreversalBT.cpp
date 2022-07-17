@@ -1,46 +1,46 @@
-class Solution {
-public:
-    void leftTraversal(TreeNode* root, vector<int>& ans){
-        if(!root) return;
-        if(!root->left && !root->right) return;
+#include<bits/stdc++.h>
+using namespace std;
+void leftTraversal(TreeNode<int>* root, vector<int>& ans){
+    if(!root) return;
+    if(!root->left && !root->right) return;
 
-        ans.push_back(root->val);
+    ans.push_back(root->data);
 
-        if(root->left) leftTraversal(root->left, ans);
-        else leftTraversal(root->right, ans);
+    if(root->left) leftTraversal(root->left, ans);
+    else leftTraversal(root->right, ans);
+}
+void leefTraversal(TreeNode<int>* root, vector<int>& ans){
+    if(!root) return;
+    if(!root->left && !root->right) {
+        ans.push_back(root->data);
+        return;
     }
-    void leefTraversal(TreeNode* root, vector<int>& ans){
-        if(!root) return;
-        if(!root->left && !root->right) {
-            ans.push_back(root->val);
-            return;
-        }
-        leefTraversal(root->left, ans);
-        leefTraversal(root->right, ans);
-    }
-    void rightTraversal(TreeNode* root, vector<int> &ans){
-        if(!root) return;
-        if(!root->left && !root->right) return;
-        
-        if(root->right) leftTraversal(root->right, ans);
-        else leftTraversal(root->left, ans);
-        
-        ans.push_back(root->val);        
-    }
+    leefTraversal(root->left, ans);
+    leefTraversal(root->right, ans);
+}
+void rightTraversal(TreeNode<int>* root, vector<int> &ans){
+    if(!root) return;
+    if(!root->left && !root->right) return;
 
-    vector<int> boundaryOfBinaryTree(TreeNode *root) {
-        //left exclu xding leaf;
-        //only leaf by inorder traversal
-        //right excluding leaf and then taking reverse;
-        vector<int> ans;
-        if(!root) return ans;
-        if(!root->left && !root->right) ans.push_back(root->val);
+    if(root->right) leftTraversal(root->right, ans);
+    else leftTraversal(root->left, ans);
 
-        ans.push_back(root->val);
-        leftTraversal(root->left, ans);
-        leefTraversal(root, ans);
-        rightTraversal(root->right, ans);
+    ans.push_back(root->data);        
+}
 
-        return ans;
-    }
-};
+vector<int> traverseBoundary(TreeNode<int>* root){
+    
+    vector<int> ans;
+    if(root==NULL) return ans;
+    
+    ans.push_back(root->data);
+    
+    leftTraversal(root->left, ans);
+    
+    leefTraversal(root->left, ans);
+    leefTraversal(root->right, ans);
+    
+    rightTraversal(root->right, ans);
+    
+    return ans;
+}
